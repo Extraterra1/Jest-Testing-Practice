@@ -68,3 +68,43 @@ test('not a number 2', () => {
 test('no divide 0', () => {
   expect(() => calculator.divide(2, 0)).toThrow("you can't divide by zero");
 });
+
+const caesarCipher = require('./caesarCipher');
+
+test('caesar cipher', () => {
+  expect(caesarCipher('this is a test', 2)).toBe('vjku ku c vguv');
+});
+
+test('default shift', () => {
+  expect(caesarCipher('this is a test')).toBe('uijt jt b uftu');
+});
+
+test('no shift', () => {
+  expect(caesarCipher('this is a test', 0)).toBe('this is a test');
+});
+
+test('non numeric shift', () => {
+  expect(() => caesarCipher('this is a test', 'xddd')).toThrow('invalid shift value');
+});
+test('shift longer than alphabet', () => {
+  expect(() => caesarCipher('this is a test', 26)).toThrow('shift cannot be longer than 25');
+});
+
+test('z to a', () => {
+  expect(caesarCipher('echo zulu', 2)).toBe('gejq bwnw');
+});
+test('z to a 2', () => {
+  expect(caesarCipher('echo zulu')).toBe('fdip avmv');
+});
+
+test('punctuation', () => {
+  expect(caesarCipher('this is a test.', 2)).toBe('vjku ku c vguv.');
+});
+
+test('uppercase', () => {
+  expect(caesarCipher('This Is A Test', 2)).toBe('Vjku Ku C Vguv');
+});
+
+test('omega test', () => {
+  expect(caesarCipher('This is a test, xyz: something else', 5)).toBe('Ymnx nx f yjxy, cde: xtrjymnsl jqxj');
+});
