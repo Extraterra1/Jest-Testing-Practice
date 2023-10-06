@@ -1,4 +1,12 @@
 const capitalize = require('./capitalize');
+const reverseString = require('./reverseString');
+const calculator = require('./calculator');
+const caesarCipher = require('./caesarCipher');
+const analyzeArray = require('./analyzeArray');
+
+// ==========================================================
+//                     CAPITALIZE
+// ==========================================================
 
 test('capitalize', () => {
   expect(capitalize('this is a test')).toBe('This is a test');
@@ -15,7 +23,9 @@ test('single character', () => {
   expect(capitalize('b')).toBe('B');
 });
 
-const reverseString = require('./reverseString');
+// ==========================================================
+//                      REVERSE STRING
+// ==========================================================
 
 test('reverse', () => {
   expect(reverseString('this is a test')).toBe('tset a si siht');
@@ -33,7 +43,9 @@ test('not string', () => {
   expect(() => reverseString(23)).toThrow('input must be a string');
 });
 
-const calculator = require('./calculator');
+// ==========================================================
+//                      CALCULATOR
+// ==========================================================
 
 test('sum', () => {
   expect(calculator.sum(2, 2)).toBe(4);
@@ -69,7 +81,9 @@ test('no divide 0', () => {
   expect(() => calculator.divide(2, 0)).toThrow("you can't divide by zero");
 });
 
-const caesarCipher = require('./caesarCipher');
+// ==========================================================
+//                      CAESAR CIPHER
+// ==========================================================
 
 test('caesar cipher', () => {
   expect(caesarCipher('this is a test', 2)).toBe('vjku ku c vguv');
@@ -107,4 +121,32 @@ test('uppercase', () => {
 
 test('omega test', () => {
   expect(caesarCipher('This is a test, xyz: something else', 5)).toBe('Ymnx nx f yjxy, cde: xtrjymnsl jqxj');
+});
+
+// ==========================================================
+//                     ANALYZE ARRAY
+// ==========================================================
+
+const arr = [1, 8, 3, 4, 2, 6];
+
+test('non array', () => {
+  expect(() => analyzeArray()).toThrow('input must be an array');
+});
+test('empty array', () => {
+  expect(() => analyzeArray([])).toThrow('array cannot be empty');
+});
+test('non numeric items in array', () => {
+  expect(() => analyzeArray([1, 2, 3, 'x', 4, 5, 6])).toThrow('non numeric items found in array');
+});
+test('average', () => {
+  expect(analyzeArray(arr).average).toBe(4);
+});
+test('min', () => {
+  expect(analyzeArray(arr).min).toBe(1);
+});
+test('max', () => {
+  expect(analyzeArray(arr).max).toBe(8);
+});
+test('length', () => {
+  expect(analyzeArray(arr).length).toBe(6);
 });
